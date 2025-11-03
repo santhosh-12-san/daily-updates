@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flip Cards with Session Storage & Code Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f1724;
+      color: white;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #6ee7b7;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 80px;
+      margin-top: 40px;
+    }
+
+    /* ==== CARD CONTAINER ==== */
+    .card {
+      width: 280px; /* 💡 Increased width for better code viewing */
+      height: 250px; /* 💡 Increased height for better code viewing */
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    /* ==== CARD INNER ==== */
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* ==== FRONT & BACK ==== */
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      background: #1e293b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      padding: 20px;
+      box-sizing: border-box; /* Include padding in the element's total width and height */
+    }
+
+    .card-front:hover {
+      background: #334155;
+      transform: scale(1.02);
+    }
+
+    .card-front h3 {
+      color: #6ee7b7;
+      margin-bottom: 10px;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background: #334155;
+      color: #cbd5e1;
+      text-align: left; /* 💡 Align code to the left */
+      padding: 10px; /* Adjusted padding for code */
+      display: block; /* Change display to block to handle text alignment better */
+      overflow: auto; /* Allow scrolling for long code blocks */
+      font-size: 14px; /* Reduced font size for code */
+    }
+
+    .card-back h4 {
+      color: #6ee7b7;
+      margin-bottom: 5px; /* Reduced margin */
+      text-align: center;
+    }
+
+    /* 💡 Styling for the code block */
+    .card-back pre {
+      margin: 0;
+      padding: 5px;
+    }
+
+    .card-back code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      white-space: pre-wrap; /* Wrap long lines of code */
+      display: block;
+      line-height: 1.2;
+    }
+
+    .reset-btn {
+      margin-top: 50px;
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .reset-btn:hover {
+      background: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Concept Flip Cards (Code Examples)</h1>
+
+  <div class="cards">
+    <div class="card" data-title="Closure">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Closure</h3>
+          <p>Click to flip for code</p>
+        </div>
+        <div class="card-back">
+          <h4>Closure Example</h4>
+          <pre><code>
+function makeCounter() {
+  let count = 0; 
+  return function increment() {
+    count += 1;
+    console.log(count);
+  };
+}
+const counterA = makeCounter();
+counterA(); // 1
+counterA(); // 2
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-title="Promise">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Promise</h3>
+          <p>Click to flip for code</p>
+        </div>
+        <div class="card-back">
+          <h4>Promise Example</h4>
+          <pre><code>
+function getData() {
+  return new Promise((resolve, reject) => {
+    // resolve('Data'); or reject('Error');
+    setTimeout(() => resolve('Data'), 1000);
+  });
+}
+getData()
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-title="Event Loop">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Event Loop</h3>
+          <p>Click to flip for code</p>
+        </div>
+        <div class="card-back">
+          <h4>Event Loop Example</h4>
+          <pre><code>
+console.log('1');
+setTimeout(() => console.log('3'), 0); 
+Promise.resolve().then(() => console.log('2'));
+console.log('4');
+
+// Output order: 1, 4, 2, 3
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-title="Hoisting">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Hoisting</h3>
+          <p>Click to flip for code</p>
+        </div>
+        <div class="card-back">
+          <h4>Hoisting Example</h4>
+          <pre><code>
+console.log(myVar); // undefined
+var myVar = "Hoisted";
+
+myFunc(); // Works
+function myFunc() {
+  console.log("I am hoisted!");
+}
+          </code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="reset-btn" onclick="resetCards()">Reset All</button>
+
+  <script>
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        // Flip the card
+        card.classList.toggle('flipped');
+
+        // Store flip state in sessionStorage
+        sessionStorage.setItem('card' + index, card.classList.contains('flipped'));
+      });
+    });
+
+    // Restore flip states from sessionStorage on load
+    window.addEventListener('load', () => {
+      cards.forEach((card, index) => {
+        const flipped = sessionStorage.getItem('card' + index) === 'true';
+        if (flipped) {
+          card.classList.add('flipped');
+        }
+      });
+    });
+
+    // Reset button clears sessionStorage
+    function resetCards() {
+      sessionStorage.clear();
+      cards.forEach(card => card.classList.remove('flipped'));
+    }
+  </script>
+</body>
+</html>
