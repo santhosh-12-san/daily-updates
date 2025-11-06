@@ -1,0 +1,9 @@
+.card-inner flips on the Y-axis when .flipped is added.
+
+CSS perspective creates a 3D effect.
+
+Each card stores its flip state (true/false) in sessionStorage.
+
+When you reload the page, the cards that were flipped remain flipped.
+
+The Reset button clears all flip states.
