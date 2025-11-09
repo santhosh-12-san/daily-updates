@@ -1,4 +1,4 @@
-// JSON data (as a string)
+
 const schoolData = `
 {
   "schoolName": "Green Valley High School",
@@ -16,7 +16,7 @@ const schoolData = `
 }
 `;
 
-// 1️⃣ Parse JSON string → JavaScript object
+
 const school = JSON.parse(schoolData);
 console.log('orginal data',school)
 console.log(typeof(school))
@@ -25,7 +25,7 @@ console.log("School Name:", school.schoolName);
 console.log("Location:", school.location);
 console.log("----------------------------------");
 
-// 2️⃣ Loop through all students using for loop
+
 console.log("All Students (using for loop):");
 for (let i = 0; i < school.students.length; i++) {
   const student = school.students[i];
@@ -34,20 +34,17 @@ for (let i = 0; i < school.students.length; i++) {
 
 console.log("----------------------------------");
 
-// 3️⃣ Loop using forEach
 console.log("Students (using forEach):");
 school.students.forEach(student => {
   console.log(`${student.name} - English Marks: ${student.marks.english}`);
 });
 console.log("----------------------------------");
 
-// 4️⃣ Filter students who scored above 85 in Science
 const topScienceStudents = school.students.filter(student => student.marks.science > 85);
 console.log("Top Science Students:");
 console.log(topScienceStudents);
 console.log("----------------------------------");
 
-// 5️⃣ Find total average marks for each student using for...of loop
 for (const student of school.students) {
   const marks = student.marks;
   const total = marks.math + marks.science + marks.english;
@@ -56,7 +53,7 @@ for (const student of school.students) {
 }
 console.log("----------------------------------");
 
-// 6️⃣ Convert back to JSON string (stringify)
+
 const jsonString = JSON.stringify(school, null, 2);
 console.log("Converted Back to JSON Format:");
 console.log(jsonString);

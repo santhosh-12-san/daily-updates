@@ -1,0 +1,115 @@
+1. Git Configuration
+
+git config --global user.name "Santhosh"
+git config --global user.email "santhosh@gmail.com"
+git config --list
+
+2. Initialize Repository
+
+mkdir git
+cd git
+git init
+
+3. Staging Files (git add)
+
+git add .
+
+git add notes.txt
+
+git add -p
+
+git add -p notes.txt
+
+Unstage
+
+git restore --staged notes.txt
+
+4. Commit
+
+git commit -m "send the git.html"
+
+5. Branching
+
+git branch feature-login
+
+git switch feature-login
+
+6. Merging Branches
+
+git merge
+
+git switch main
+
+git merge feature-login
+
+7. Remote Repository
+
+git remote add origin https://github.com/santhosh-12-san/santhosh.git
+
+git remote -v
+
+8. Push to GitHub
+
+git push -u origin main
+
+9. Pull Changes
+
+git pull
+
+10. Fetch (without merge)
+
+git fetch origin
+
+11. Status & Logs
+
+git status
+
+git log
+
+git log --oneline
+
+12. Reset
+
+git reset --soft HEAD~1
+
+13. Stash
+
+git stash save "Work by Santhosh on notes.txt"
+
+Apply
+
+git stash apply
+
+14. Tags
+
+git tag -a v1.0 -m "First release added by Santhosh"
+
+Push tags
+
+git push origin --tags
+
+15. Clean
+
+git clean -n
+
+Delete
+
+git clean -f
+
+16. Diff
+
+git diff notes.txt
+
+17. Remove & Rename Files
+
+Delete
+
+git rm notes.txt
+
+Rename
+
+git mv notes.txt oldnotes.txt
+
+18. Restore
+
+git restore notes.txt
