@@ -1,0 +1,138 @@
+
+1 Create Database
+
+CREATE DATABASE company_db;
+
+Use the database
+
+USE company_db;
+
+
+2. Create Table 
+
+CREATE TABLE employees (
+    emp_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    department VARCHAR(50),
+    salary DECIMAL(10,2),
+    email VARCHAR(100) UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+3. Insert Values
+
+INSERT INTO employees (name, department, salary, email)
+VALUES 
+('Santhosh', 'IT', 45000, 'santhosh@gmail.com'),
+('Harish', 'HR', 38000, 'harish@gmail.com'),
+('Manu', 'Finance', 52000, 'manu@gmail.com');
+
+ 4. Select Data
+
+SELECT * FROM employees;
+
+
+5. Select With Conditions
+
+SELECT name, salary 
+FROM employees 
+WHERE salary > 40000;
+
+ 6. Update Data
+
+UPDATE employees
+SET salary = 48000
+WHERE name = 'Santhosh';
+
+ 7. Delete Data
+
+DELETE FROM employees
+WHERE emp_id = 2;
+
+8. ORDER BY
+
+SELECT * FROM employees
+ORDER BY salary DESC;
+
+ 9. LIMIT
+
+SELECT * FROM employees
+LIMIT 2;
+
+ 10. WHERE and HAVING 
+
+SELECT * FROM employees
+WHERE salary > 40000;
+
+SELECT department, COUNT(*)
+FROM employees
+GROUP BY department
+HAVING COUNT(*) >= 1;
+
+11. Aggregate Functions
+
+SELECT 
+    COUNT(*) AS total_employees,
+    AVG(salary) AS avg_salary,
+    MAX(salary) AS max_salary,
+    MIN(salary) AS min_salary
+FROM employees;
+
+12. LIKE 
+
+SELECT name FROM employees
+WHERE name LIKE 'S%';
+
+13. IN and BETWEEN
+
+SELECT * FROM employees
+WHERE department IN ('IT', 'Finance');
+
+SELECT * FROM employees
+WHERE salary BETWEEN 40000 AND 55000;
+
+ 14. JOINS  Create Another Table First
+
+CREATE TABLE departments (
+    dept_id INT AUTO_INCREMENT PRIMARY KEY,
+    department VARCHAR(50),
+    location VARCHAR(50)
+);
+
+INSERT INTO departments (department, location)
+VALUES
+('IT', 'Bangalore'),
+('HR', 'Mysore'),
+('Finance', 'Chennai');
+
+Inner join
+
+SELECT e.name, e.salary, d.location
+FROM employees e
+INNER JOIN departments d
+ON e.department = d.department;
+
+Left join
+
+SELECT e.name, d.location
+FROM employees e
+LEFT JOIN departments d
+ON e.department = d.department;
+
+ 15. GROUP BY
+
+SELECT department, COUNT(*) AS total_emp
+FROM employees
+GROUP BY department;
+
+
+16. CREATE VIEW
+
+CREATE VIEW high_salary AS
+SELECT name, salary
+FROM employees
+WHERE salary > 45000;
+
+Select from view:
+
+SELECT * FROM high_salary;
