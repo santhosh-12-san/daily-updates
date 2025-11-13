@@ -1,0 +1,318 @@
+
+1.Explain var, let, and const 
+1.1 var
+var is the oldest way of declaring variables in JavaScript.
+It has function scope and allows redeclaration and reassignment
+Rarely used in modern JavaScript
+Only use if older browser support is required
+
+example:
+var name = "Santhosh";
+console.log(name);
+
+var name = "Santhu"; 
+console.log(name);
+name = "Boss"; 
+console.log(name); 
+
+1.2 let
+let is modern JavaScript variable declaration.
+It has block scope and cannot be redeclared,but it can be reassigned
+When value needs to change
+When block scope control is needed
+
+example:
+let age = 25;
+console.log(age);
+age = 30; 
+console.log(age); 
+
+if (true) {
+    let city = "Bengaluru"; 
+    console.log(city); 
+}
+
+1.3 const
+const is used to declare constants.
+It has block scope, cannot be redeclared, and cannot be reassigned.
+When value should never change.
+For arrays, objects, configuration values.
+Most recommended for fixed declarations.
+
+example:
+const PI = 3.14;
+console.log(PI); 
+
+const user = { name: "Santhu", age: 22 };
+user.age = 23; 
+console.log(user);
+
+
+2.Hoisting
+
+Hoisting is a JavaScript mechanism where variable and 
+function declarations are moved to the top of their scope during the compile phase, before the code is executed.
+Because of hoisting:
+You can use variables and functions before declaring them (but behavior differs for var/let/const).
+Only declarations are hoisted, not initializations.
+
+example 1:
+var a;          
+console.log(a); 
+a = 10;
+
+example 2:
+showOffer(); 
+
+function showOffer() {
+    console.log("Today's offer: 20% OFF on mobiles!");
+}
+
+
+3.Difference between == and ===
+
+== compares only values, not types.
+Before comparing, JavaScript automatically converts the data types (type coercion).
+example:
+console.log(5 == "5");  
+console.log(true == 1);  
+console.log(false == 0); 
+console.log(null == undefined); 
+
+=== compares value AND data type.
+No type conversion happens.
+example:
+console.log(10 === 10); 
+
+example both : 
+let inputAge = "18";
+if (inputAge == 18) {
+    console.log("Allowed (loose check)");
+}
+if (inputAge === 18) {
+    console.log("Strict match"); 
+} else {
+    console.log("Not allowed (type mismatch)");
+}
+
+
+4. Explain the difference between primitive and non-primitive data types
+
+Primitive data types are basic, predefined data types in JavaScript.
+They store single values, are immutable (cannot be changed), and are stored directly in memory (stack).
+
+Primitive Types
+String
+Number
+Boolean
+Null
+Undefined
+Symbol
+
+example:
+let a = 10;
+let b = a; 
+b = 20;
+console.log(a); 
+console.log(b);
+
+Non-primitive data types are objects in JavaScript.
+They can store multiple values, are mutable, and are stored in heap memory with a reference stored in stack.
+
+Object
+Array
+Function
+
+example 1:
+let obj1 = { name: "Santhosh" };
+let obj2 = obj1;
+obj2.name = "Santhu";
+console.log(obj1.name); 
+console.log(obj2.name); 
+
+example 2:
+let arr1 = [1, 2, 3];
+let arr2 = arr1;
+arr2.push(4);
+console.log(arr1); 
+
+example both:
+
+let productName = "Laptop"; 
+
+let product = {            
+    name: "Laptop",
+    price: 55000
+};
+
+
+5. Explain the this keyword.
+this is a keyword in JavaScript that refers to the object that is currently executing the code.
+Its value changes based on where and how a function is called (not where it is written).
+Helps access current object properties
+Used in methods, constructors, classes, event handling, etc.
+Behavior depends on execution context.
+example 1:
+const user = {
+    name: "Santhosh",
+    showUser() {
+        console.log("Logged in as:", this.name);
+    }
+};
+user.showUser();
+
+
+example 2: this Inside an Arrow Function
+const person = {
+    name: "Santhu",
+    show: function() {
+        const arrow = () => {
+            console.log(this.name);
+        };
+        arrow();
+    }
+};
+person.show();
+
+
+6. Closure 
+A closure is a function that remembers and accesses variables from its outer (parent)
+function scope even after the parent function has finished executing.
+Because JavaScript uses lexical scoping, meaning inner functions have access to variables of the outer functions.
+
+example:
+function bankAccount() {
+    let balance = 1000; 
+    return {
+        deposit(amount) {
+            balance += amount;
+            console.log("Balance:", balance);
+        },
+        withdraw(amount) {
+            balance -= amount;
+            console.log("Balance:", balance);
+        }
+    };
+}
+
+const account = bankAccount();
+account.deposit(500);  
+account.withdraw(200); 
+
+example 2:
+function cart() {
+    let quantity = 0;
+
+    return function addItem() {
+        quantity++;
+        console.log("Items in cart:", quantity);
+    };
+}
+
+const userCart = cart();
+userCart();  
+userCart();  
+
+7. IIFE
+IIFE (Immediately Invoked Function Expression) is a JavaScript function that is defined and executed immediately at the same time.
+It runs as soon as it is created, without needing to be called separately.
+Immediately Invoked → runs instantly
+Function Expression → created as an expression, not a normal function
+
+example: 
+(function (name) {
+    console.log("Hello " + name);
+})("Santhosh");
+
+8.Higher-Order Function
+A Higher-Order Function is a function that does any of the following:
+Takes another function as an argument, or
+Returns a function, or
+Does both.
+
+example 1:
+function greet(name) {
+    return "Hello " + name;
+}
+function processUser(greetFunction, userName) {
+    return greetFunction(userName);  
+}
+console.log(processUser(greet, "Santhosh"));
+
+example 2:
+function multiplier(x) {
+    return function (y) {
+        return x * y;
+    };
+}
+const double = multiplier(2);
+console.log(double(5)); 
+
+example 3:
+const numbers = [1, 2, 3, 4, 5];
+const greaterThan3 = numbers.filter(function(num) {
+    return num > 3;
+});
+console.log(greaterThan3); 
+
+example 4:
+const products = [
+    { name: "Mobile", available: true },
+    { name: "Laptop", available: false }
+];
+
+const availableProducts = products.filter(function(p) {
+    return p.available === true;
+});
+
+console.log(availableProducts);
+
+
+9. Prototype
+Prototype is a built-in mechanism in JavaScript that allows objects to inherit properties and methods from other objects.
+Every JavaScript object has a hidden internal property called [[Prototype]] which refers to another object.
+Objects can inherit features from other objects.
+That inheritance happens using the prototype.
+
+example:
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.sayHello = function () {
+    console.log("Hello, " + this.name);
+};
+const p1 = new Person("Santhosh");
+p1.sayHello();
+
+example 2:
+function Student(name) {
+    this.name = name;
+}
+
+Student.prototype.getFeeStatus = function () {
+    console.log(this.name + "'s fee is pending");
+};
+
+const s1 = new Student("Santhu");
+s1.getFeeStatus();
+
+
+10. Prototype Chaining
+Prototype Chaining is a mechanism in JavaScript where objects can access properties 
+and methods from their own prototype and from the prototypes higher up in the chain.
+JavaScript keeps looking up the chain until it finds the property or reaches null.
+
+example :
+const mobile = {
+    brand: "Samsung"
+};
+console.log(mobile.toString()); 
+
+example 2:
+const car = {
+    brand: "Toyota",
+    model: "Fortuner"
+};
+
+console.log(car.toString());
+
