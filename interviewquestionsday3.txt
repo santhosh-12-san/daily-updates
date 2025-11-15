@@ -1,0 +1,350 @@
+1. Closure--------------
+A closure is created when an inner function is defined within an outer function,
+ and the inner function refers to variables from the outer function's scope (its lexical environment).
+When the outer function runs and completes, its local variables would normally be destroyed. However, 
+the closure keeps a reference to those outer variables (the environment), allowing the inner function to
+ access and update them later.
+ example 1 :
+
+ function makeCounter() {
+  let count = 0; 
+  return function() { 
+    count += 1; 
+    return count;
+  };
+}
+const counterA = makeCounter();
+console.log(counterA()); 
+console.log(counterA());
+
+example 2:
+function createBankAccount() {
+    let balance = 1000; 
+    return {
+        deposit(amount) {
+            balance += amount;
+            console.log("Balance: " + balance);
+        },
+        withdraw(amount) {
+            balance -= amount;
+            console.log("Balance: " + balance);
+        }
+    };
+}
+const account = createBankAccount();
+account.deposit(500);   
+account.withdraw(200);
+
+Advantages of Closures
+1. Data Privacy (Encapsulation)
+Variables can be kept private and safe from outside access.
+Useful for banking apps, login systems, counters, timers, etc.
+2. State Preservation
+Closures remember values — helpful for counters, loops, caching.
+3. Functional Programming Support
+Closures help create factory functions, decorators, and module patterns.
+4. Reduces Global Variables
+Avoids polluting global scope and prevents variable conflicts.
+
+Disadvantages of Closures
+1. High Memory Usage
+Variables inside closures stay in memory longer, even after outer function ends.
+2. Hard to Debug
+Beginners find it difficult to understand why variables are still accessible.
+3. Risk of Memory Leaks
+If closures store unnecessary data, it stays in RAM for a long time.
+4. Overuse Can Make Code Complicated
+Too many nested functions reduce readability.
+
+2.promises-----------
+
+A Promise in JavaScript is an object that represents the result of an asynchronous operation that may complete now, later, or never.
+Pending	The initial state:  The asynchronous operation has neither completed nor failed.	The process is still running.
+resolve:	The operation completed successfully, and the Promise now holds the resulting value. The Promise is resolved with a value.
+Rejected:   The operation failed, and the Promise now holds the reason for the failure (an error object).
+methods: 
+
+1. Promise.then()
+Used to handle successful results.
+promise.then(data => console.log(data));
+
+2. Promise.catch()
+Used to handle errors.
+promise.catch(err => console.log(err));
+
+3. Promise.finally()
+Runs whether success or failure.
+promise.finally(() => console.log("Finished"));
+
+4. Promise.all()
+Runs multiple promises in parallel and returns result only if ALL succeed.
+Promise.all([p1, p2, p3])
+    .then(result => console.log(result))
+    .catch(error => console.log("One failed:", error));
+
+5. Promise.allSettled()
+Runs all promises and returns the status of each, even if some fail.
+Promise.allSettled([p1, p2, p3])
+    .then(result => console.log(result));
+
+6. Promise.race()
+Returns the result of the first promise that finishes (success or fail).
+Promise.race([p1, p2, p3])
+    .then(data => console.log("First:", data))
+    .catch(err => console.log("First error:", err));
+
+7. Promise.any()
+Returns the first successful promise.
+If all fail → returns AggregateError.
+Promise.any([p1, p2, p3])
+    .then(result => console.log("Success:", result))
+    .catch(err => console.log("All failed"));
+
+8. Promise.resolve()
+Creates a fulfilled promise instantly.
+Promise.resolve("OK")
+    .then(x => console.log(x));
+
+9. Promise.reject()
+Creates a rejected promise instantly.
+Promise.reject("Error")
+    .catch(e => console.log(e));
+
+example:
+function getUser() {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("User loaded"), 2000);
+  });
+}
+
+function getPosts() {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("Posts loaded"), 1000);
+  });
+}
+
+Promise.all([getUser(), getPosts()])
+  .then(result => console.log(result))
+  .catch(err => console.log(err))
+  .finally(() => console.log("Request Finished"));
+
+3.cookies and sessions-----------
+
+Cookies: Cookies are small pieces of data stored in the user's browser by websites. 
+They are used to store user-specific information, such as login credentials, preferences, or shopping cart items.
+Sessions: Sessions are server-side data storage mechanisms used to store information about a user across multiple
+ pages or visits. They are often used to maintain user authentication state and store temporary data during a user's session.
+
+4.Difference between normal function and arrow function?------------------
+Normal Function
+A normal (regular) function in JavaScript is created using the function keyword. 
+It has its own this context, supports hoisting, and can be used as a constructor.
+example: 
+function add(a, b) {
+    return a + b;
+}
+console.log(add(10, 20)); 
+
+Arrow Function
+An arrow function is a shorter way to write functions. It does NOT have its own this,
+not hoisted, and cannot be used as a constructor.
+example:
+const add = (a, b) => a + b;
+console.log(add(10, 20));
+
+4.How to handle single-thread concurrency
+Single-thread concurrency in JavaScript can be handled using asynchronous programming techniques like callbacks, 
+Promises, async/await, and using features like setTimeout and setInterval to perform tasks asynchronously.
+
+5. How JavaScript handles concurrency----------------
+
+ 1. JavaScript is single-threaded
+Only one line of code runs at a time in the call stack.
+
+2. Long operations (like fetch, setTimeout) are sent to Web APIs
+Example:
+setTimeout(() => console.log("Timeout"), 1000);
+setTimeout goes to WebAPI
+JavaScript does NOT block the main thread
+After 1 sec → callback goes to the Callback Queue
+
+3. Event Loop manages concurrency
+The Event Loop checks:
+Is the call stack empty?
+YES → pick the next callback/microtask
+NO → wait
+This gives concurrency even with a single thread.
+
+4. Microtasks (Promises) run before callback queue
+
+Example:
+console.log("1");
+setTimeout(() => console.log("2"), 0);
+Promise.resolve().then(() => console.log("3"));
+console.log("4");
+Techniques to Handle Concurrency (Interview Points)
+
+1. Callbacks
+Classic async handling (but causes callback hell).
+setTimeout(() => {
+  console.log("Task done");
+}, 1000);
+
+ 2. Promises
+Avoid callback hell.
+fetchData()
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
+
+ 3. async / await
+Cleaner syntax for async operations.
+async function run() {
+  const data = await fetchData();
+  console.log(data);
+}
+
+ 4. Event Loop (core of concurrency)
+Helps run multiple async tasks without blocking the single thread.
+
+ 5. Worker Threads (for heavy CPU tasks)
+JavaScript (browser) cannot create threads,
+but we can use Web Workers:
+const worker = new Worker("worker.js");
+worker.postMessage("start");
+In Node.js → Worker Threads.
+
+ 6. Non-blocking I/O
+All network, file, and timer operations use asynchronous APIs so that the main thread does not get blocked.
+
+6.What's thread pool in JS----------------
+A thread pool in JavaScript refers to the group of background threads managed by libuv (inside Node.js)
+that handle expensive, blocking tasks such as file I/O, crypto operations, DNS lookups, and compression.
+JavaScript itself runs on a single main thread, but Node.js internally uses a thread pool of 4 threads (default)
+to execute heavy operations asynchronously without blocking the main event loop.
+Because JavaScript is single-threaded.
+If a heavy task runs on the main thread, everything else stops.
+So Node.js offloads heavy operations into a thread pool → allowing the main thread to stay free for JS code.
+example:
+const crypto = require("crypto");
+console.time("hash");
+crypto.pbkdf2("password", "salt", 100000, 64, "sha512", () => {
+    console.timeEnd("hash");
+});
+
+
+7. Debouncing and Throttling-----
+Debouncing
+Debouncing ensures that a function is executed only after a specified period of inactivity has passed since the last event trigger.
+The function is designed to wait until things "settle down."
+How it Works
+Imagine trying to call an elevator. If you press the button repeatedly, the elevator doesn't cycle through requests;
+it just waits a moment after the last press before deciding to move.
+When the event fires (e.g., a key is pressed), a timer starts.
+If the event fires again before the timer expires, the existing timer is reset.
+The function is only executed once the specified quiet period has elapsed.
+When to Use Debouncing
+Debouncing is ideal for scenarios where you only care about the final state after rapid changes have stopped.
+Searching/Autosuggest: Sending an AJAX request to the server only after the user stops typing in the search box for a short delay (e.g., 300ms).
+Window Resizing: Running a complex layout calculation only after the user finishes resizing the window.
+Form Validation: Validating form input after the user pauses typing, not on every keystroke.
+
+Throttling
+Throttling ensures that a function is executed at most once within a given time frame, 
+regardless of how many times the event is triggered. It ensures a steady, limited stream of function calls.
+How it Works
+Imagine a water tap that only allows water to flow through every half-second, no matter how hard you turn the handle.
+When the event fires, the function executes, and a timestamp is recorded.
+Any subsequent event triggers are ignored until the minimum time interval has passed.
+Once the time interval is over, the function can be executed again.
+
+When to Use Throttling
+Throttling is best for scenarios where continuous updates are needed, but at a controlled, limited rate to save resources.
+Scroll Events: Firing an event to check scroll position (e.g., lazy loading images or infinite scrolling) every 200ms, 
+not hundreds of times per second.
+Rate-Limiting API Calls: Ensuring a user can only interact with a button that triggers 
+an expensive API call a maximum of once every few seconds.
+Mouse Move Tracking: Recording the mouse position at a fixed interval to avoid overwhelming the system.
+
+
+8. Explain Capturing and Bubbling------
+Capturing
+Event Capturing is the phase where the event travels from the topmost ancestor (document) down to the target element.
+It goes from document → body → parent → child.
+
+Real-world Example
+You click a button inside a div.
+Browser first checks if document has a capturing listener → then body → then div → then the button.
+ Capturing Example
+To enable capturing, pass { capture: true } or true as the 3rd argument.
+document.addEventListener("click", () => {
+    console.log("Document Capture");
+}, true);
+
+div.addEventListener("click", () => {
+    console.log("Div Capture");
+}, true);
+
+button.addEventListener("click", () => {
+    console.log("Button Capture");
+}, true);
+
+Clicking button prints in this order:
+Document Capture
+Div Capture
+Button Capture
+
+Event Bubbling
+Event Bubbling is the phase where the event travels from the target element back up to the ancestors.
+It goes from child → parent → body → document.
+ Real-world Example
+You click a button → event fires on the button first, then moves up to its parent elements.
+Bubbling Example (default behavior)
+button.addEventListener("click", () => {
+    console.log("Button Bubble");
+});
+div.addEventListener("click", () => {
+    console.log("Div Bubble");
+});
+document.addEventListener("click", () => {
+    console.log("Document Bubble");
+});
+Clicking button prints in this order:
+Button Bubble
+Div Bubble
+Document Bubble
+
+9.prototype----
+The Prototype is a core concept in JavaScript's object model, which is based on prototypal inheritance rather than classical inheritance.
+A prototype is simply an object from which other objects inherit properties and methods. 
+Every JavaScript object automatically has an internal property,
+referred to in the specification as [[Prototype]], which points to its prototype object.
+Key Concepts
+The Prototype Link ([[Prototype]] or .__proto__)
+This is the actual link that connects an object to its prototype.
+When you try to access a property or method on an object, if JavaScript can't find it directly on that object, 
+it follows this internal [[Prototype]] link to the next object in the chain to look for it.
+The Prototype Object (.prototype)
+This property is only found on constructor functions (including classes).
+It is the object that will become the prototype ([[Prototype]]) for all objects created by that constructor.
+example:
+const p1 = new Person("Santhu", 22);
+const p2 = new Person("Harish", 25);
+
+console.log(p1.sayHello()); // shared from prototype
+console.log(p2.sayHello());
+
+
+10.Explain Prototype inheritance----
+Prototype inheritance in JavaScript is a mechanism where one object can inherit properties and methods from another object through the prototype chain.
+Instead of classes like other languages, JavaScript uses objects inheriting from other objects.
+Every object has a hidden internal property [[Prototype]]
+this creates a prototype chain used for property & method lookup
+If a property doesn’t exist on the object, JS automatically looks up the chain
+example:
+const parent = {
+  greet() {
+    return "Hello from parent!";
+  }
+};
+const child = Object.create(parent);
+console.log(child.greet());
