@@ -1,0 +1,266 @@
+1.Event loop:
+Event loop is the manages the execution of the code.
+ Handing asynchronous operation and ensuring non-blocking behaviour in a single threaded environment.
+  it allows javascript to execute one pice of code at a time while still performing takes link reading files , 
+  handling http requests or waiting for times without freezing the program.
+Javascript runs on a single thread means it can execute only one task at a time. 
+However real world applications need to handle multiple task like user input, network call , timer.
+It works:
+Call stack(main thread)
+All synchronous code (like normal functions, loops, variables)runs here
+Web APIs (browser or node.js APIs):
+When asynchronous operations like setTimeout , fetch or fs.readFile are called , they are sent to webAPIs
+These APIs handle them outside the call stack
+3.callback /task queus:
+Once an asyc task finish ,its call back is placed in the callback queus also called the task queus
+4.microtask queus:
+Promises like .then catch and finaly and asyc and awit process first because microtasks have higher priority then normal task
+5.event loop:
+The event loop continuously checks the call stack . if the call stack is empty if first processes all microtasks in the microtask queus .
+After that, it takes one callback from the task queus and pushes it to the call stack for execution 
+this process repeats endlessly that’s why its called an event loop.
+Example 1:
+console.log("Uploading photo...");
+Promise.resolve().then(() => {
+console.log("Upload complete");
+});
+console.log("Scrolling feed...");
+Example 2:
+async function playVideo() {
+console.log("Loading video...");
+  await new Promise(r => setTimeout(r, 2000));
+  console.log("Video playing");
+}
+playVideo();
+console.log("Adjusting volume...");
+
+
+2.async and await keyword :
+used to handle asynchronous operations more gracefully compared to callback or .then() and .catch() with promises
+ansyc 
+to define as asynchronous returns a promises and it is resolved value of that promises will be whatever the function returns.
+if the function throw an error the promise will be reject without error.
+Await :
+Can only used inside the an async function  .
+it is used to process the execution of the asynchronous function until a promises iss resolved or rejected
+When the promise is resolved await return the resolve values .if the promises is rejects it  throw an error.
+Example :
+function getData() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("Data received!");
+    }, 2000); 
+  });
+}
+async function fetchData() {
+  console.log("Fetching data...");
+  const result = await getData();
+  console.log(result); 
+}
+fetchData();
+
+
+
+3.promises :
+promises in javascript is used to handle asynchronous operations .
+it represents a value that will be available in the future either success (resolved) or failure (rejected)
+it have three stages like panding – initial state fulfied or rejected 
+resolved()- used when the task is successful
+reject()- used when the task fails
+
+mehod in promises
+.then – used to handle the resolved(successful) result of a promises.
+.catch – used to handle error  or rejections from a promises, it runs when the reject()function is called.
+.Finally() – used to run code after the promises is settled there is not matter is resolved or rejected , good for the cleanup operations .
+.all – take an array of promises and wait the until all promises are resolved if any one fail it immediately rejecte.
+.race() – retruns the first promises that gets resolved or rejected .
+.allsettled – waite for all promises to finish whether they success or fail it gives result for all.
+.Any()-returns the first fulfilled(resolve) promises  if all are rejected it returns an error.
+Example :
+let myPromise = new Promise((resolve, reject) => {
+    let success = true
+
+    setTimeout(() => {
+        if (success) {
+            resolve("
+ Operation successful!");
+        } else {
+            reject("Operation failed!");
+        }
+    }, 2000); // Simulate 2 seconds delay
+});
+myPromise
+    .then((message) => {
+        console.log("Resolved:", message);
+    })
+    .catch((error) => {
+        console.log("Rejected:", error);
+    })
+    .finally(() => {
+        console.log("Promise completed!");
+    });   Promise
+
+
+
+4. Modules :
+Es6  intruduce a standard modules system for javascript making it easier to organize and reused code acros different file 
+Each modules can contain variable function classes or any other code and can export parts of its code to be used in other modules.
+They help organize your code into smaller maintainable and reusable parts instead of putting everything in one big file .
+Modules help in managing the complexing of large code becomes impoving maintainability and 
+avaiding naming conflicte(variables and function same names) make maintenance and tasing easier.
+
+Types of modules:
+1.ES6 modules (ecmas modules )
+Introduce in ES6 used import and export keywords.
+Static loading (import before runthe code).
+Works both browser and mode.js also.
+Used strict mode automatically.
+Example:
+Import from ES6 module
+import { PI, add, areaOfCircle } from './modules.js';
+
+console.log("PI:", PI);
+console.log("Add:", add(10, 5));
+console.log("Area of Circle:", areaOfCircle(5));
+export const PI = 3.14159;
+
+export function add(a, b) {
+return a + b;
+}
+export function areaOfCircle(r) {
+ return PI * r * r;
+}
+
+2. common js modules
+User require() and module.export. 
+Loads dynamically at runtime.
+Work only in node.js not directly in browser.
+Synchronous (not  suitable for browser)
+still widly used in backend code.
+Example:
+function add(a, b) {
+ return a + b;
+ }
+ function sub(a, b) {
+   return a - b;
+ }
+const PI = 3.14;
+module.exports = { add, sub, PI };
+
+const { add, sub, PI } = require('./modules');
+console.log("PI:", PI);
+console.log("Add:", add(10, 5));
+console.log("Sub:", sub(10, 5));
+
+
+3.AMD(asynchronous modules definition)
+Used define()  and require() keyword.
+Used brower and frontend .
+Its define and load modules asynchronous in the browser it is used before ES6 modules existed.
+It is large and loading everything at once slowed the web pages.
+Example:
+require(['modules'], function(math) {
+  console.log("PI:", math.PI);
+  console.log("Add:", math.add(10, 5));
+  console.log("Area of Circle:", math.ardefine(function() {
+  const PI = 3.14;
+
+  function add(a, b) {
+    return a + b;
+  }
+
+  function areaOfCircle(r) {
+    return PI * r * r;
+  }
+
+  return {
+    add,
+    areaOfCircle,
+    PI
+  };
+});
+
+eaOfCircle(5));
+});
+
+
+5. hoisting 
+In javascript is the  process by which the javascript engine moves variable and 
+function declarations to the top of their scope either global or local before executing the code
+ means we can use a variable or function before it is  declared in the code.
+Because during the compilation phase. Javascript knows all variable and function declaration .
+Hoists var to the top but I itializes them with undefined.
+Let and const are also hoisted but placed in a temporal dead zone they cannot be accessed before initialization
+
+
+6.closure
+Closure happens when  one function inside the other function  an inner function remember
+ and access variable from its outer function even after that outer function has finished executing 
+means- even If the  parent function is gone from the call stack ,
+ the inner function still remembers the variable and environment where it was created because
+  of js lexical scoping  and function execution model
+Example:
+Function outer()
+Let count = 0
+Function inner(){
+Count ++
+Consol.log(count)
+}
+Return inner;
+}
+Count counter = outer()
+Counter()
+Counter()
+Counter()
+
+7 . Higher order function
+ A higher order function is a function that either takes another function as an argument or returns a function as its result
+It used to make code reusable and cleaner to handle asynchronous operations easily (like callback promises)
+Built in higher order function
+Map()- create a new array by applaying a function to each elememt
+Ex:[1,2,3].map(x=> x*2) 
+Filter() – filter array elements based on a condition it will create new array containg only
+Ex: [1,2,3,4,5].filter(x => x%2 ===0)
+For each()- executes a function an each element 
+Ex : [1,2,3].foreach(x => consol.log(x)
+Reduce()- reduce array element to a single  value
+[1,2,3,4].reduce((a,b)=>a+b,0)
+Sort()- sort element using a comparison function
+Ex: [3,2,4,1].sort((a,b)=>a-b)
+
+
+8. web storage:
+In modern web development storing data on the client side is very important for performance and user experience .
+Javascript provides access to this storage through three main mechanism local storage,session storage and cookies
+Local storage:
+Local storage allows web application to store data permanently in the browser the data is
+ saved as key value pairs and it will storage capacity around 5 – 10 mb per domain
+It is not sent to the server automatically.
+Storing small offline data for progressive web pages.
+Session storage:
+Session storage is similar to local storage but the data lasts only for one browser 
+session once the browswe tab is closed the data is automatically deleted.
+Capability around 5mb.
+Only available for the current tab or window.
+Data is not shared between tabe or windown.
+Not sent to the server.
+Cookies:
+Cookies are small text files storing in the browser by websites.
+They were the first method used for client side data storing 
+and are still used todays for user tracking .it have within the 4 kb per cookies.
+Automatically send to the server with every http
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
