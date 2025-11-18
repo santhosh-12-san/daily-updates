@@ -1,0 +1,134 @@
+1.Higher order function
+A higher order function is a function that either takes another function as an argument 
+or returns a function as its result.
+It used to make code reusable and cleaner to handle asynchronous operations easily (like callback promises).
+To allow functional programming style in javascript.
+
+Built in higher order function
+Map()- create a new array by applaying a function to each elememt
+Ex:[1,2,3].map(x=> x*2) 
+Filter() – filter array elements based on a condition it will create new array containg only
+Ex: [1,2,3,4,5].filter(x => x%2 ===0)
+For each()- executes a function an each element 
+Ex : [1,2,3].foreach(x => consol.log(x)
+Reduce()- reduce array element to a single  value
+[1,2,3,4].reduce((a,b)=>a+b,0)
+Sort()- sort element using a comparison function
+Ex: [3,2,4,1].sort((a,b)=>a-b)
+
+
+2 prototype:
+Prototype is on object that allows other objects to inherit properties and methods.
+Every javascript function which can be used as a custructor has a prototype property 
+and every object created from that constructor has an internal link [prototype] pointing 
+ to it This is called prototype based inheritance.
+It work javascript first checks if that property exists on the object itself .
+If not it looks for the property in the objects prototype.
+This continues up the prototype chain until it reaches object prototype.
+prototype chaining  i sthe process of travaersing the prototype chain to
+ access the propertice anad method of an objects prototype and its parent prototype
+It will be use we want to share methods or properties among all instances of an object
+it will save the memory.
+You are creating constructor functions or custom object types.
+You want to understand or extend built in javascript objects like array , string etc…
+
+Example :
+function ATM(bankName) {
+  this.bankName = bankName;
+}
+ATM.prototype.insertCard = function () {
+  return "Card inserted";
+};
+ATM.prototype.enterPin = function () {
+  return "PIN Entered";
+};
+ATM.prototype.withdraw = function (amount) {
+ return "Withdrawing " + amount;
+};
+const sbiAtm = new ATM("SBI");
+const hdfcAtm = new ATM("HDFC");
+console.log(sbiAtm.withdraw(500)); 
+console.log(hdfcAtm.withdraw(1000));
+
+3.this  keyword
+
+this refers to the object that is calling the function.
+this in JavaScript refers to the current execution context.
+Its value changes depending on how a function is invoked 
+whether it’s inside an object, used with call/apply/bind,
+used inside a constructor, used with event listeners, or used globally.
+It always points to the object that owns the function at execution time.
+
+1.Global Scope: Variables declared outside any function or block are global.
+They are accessible anywhere in the program.
+Ex:
+let x = 10; 
+function show() {
+  console.log(x); 
+}
+show(); -*
+
+2.Function Scope: Variables declared inside a function are accessible only inside that function.
+Ex: function test() {
+  let num = 5;  
+  console.log(num);
+}
+test();
+
+3. Block Scope
+Variables declared inside {} with let or const are block-scoped.)
+var is not block-scoped — only function-scoped.
+Ex:
+if (true) {
+  var x = 10;
+}
+console.log(x); 
+
+4. Lexical Scope (Closures)
+A function can access variables from its parent scope, even if the parent function has finished execution.
+Ex function outer() {
+  let message = "Hello";
+
+  function inner() {
+
+    console.log(message);
+  }
+
+  inner();
+}
+
+outer();
+
+5. Module Scope
+Each JavaScript file (.js) is treated as a separate module.
+Variables inside it are not global, they stay inside that module.
+Ex: 
+let a = 100; 
+export default a;
+
+6.Arrow Functions
+Arrow functions do not create their own this.
+They take this from the surrounding (lexical) scope.
+Example
+const user = {
+  name: "Satish",
+  show: () => {
+    console.log(this.name); 
+  }
+};
+user.show();
+
+7. Explicit Binding (call, apply, bind)
+You can manually set this using:
+•	.call() → pass arguments one by one
+•	.apply() → pass arguments in array
+•	.bind() → returns new function with fixed this
+Example
+function greet() {
+  console.log("Hello " + this.name);
+}
+
+const user = { name: "Satish" };
+
+greet.call(user);   
+
