@@ -1,0 +1,154 @@
+1. Create Database
+CREATE DATABASE school_db;
+USE school_db;
+
+2. Create Table students
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    age INT,
+    gender ENUM('Male', 'Female'),
+    marks INT,
+    city VARCHAR(50)
+);
+
+3. Insert Data
+INSERT INTO students (name, age, gender, marks, city) VALUES
+('Santhosh', 22, 'Male', 85, 'Bengaluru'),
+('Harish', 23, 'Male', 75, 'Mysuru'),
+('Pooja', 21, 'Female', 90, 'Bengaluru'),
+('Asha', 20, 'Female', 60, 'Hubli'),
+('Kiran', 22, 'Male', 45, 'Mysuru');
+
+4. Select All Records
+SELECT * FROM students;
+
+5. WHERE Condition
+Example: Students with marks above 70
+SELECT * FROM students WHERE marks > 70;
+
+6. LIKE operator
+Name starts with 'S'
+SELECT * FROM students WHERE name LIKE 'S%';
+
+Name contains 'a'
+SELECT * FROM students WHERE name LIKE '%a%';
+
+7. ORDER BY
+Sort by marks (descending)
+SELECT * FROM students ORDER BY marks DESC;
+
+Sort by name (ascending)
+SELECT * FROM students ORDER BY name ASC;
+
+8. UPDATE
+Update marks of Santhosh
+UPDATE students
+SET marks = 95
+WHERE name = 'Santhosh';
+
+9. DELETE
+Delete a student from Hubli
+DELETE FROM students WHERE city = 'Hubli';
+
+10. Aggregate Functions
+Average marks:
+SELECT AVG(marks) AS avg_marks FROM students;
+
+Maximum marks:
+SELECT MAX(marks) AS max_marks FROM students;
+
+Count of students:
+SELECT COUNT(*) AS total_students FROM students;
+
+11. GROUP BY
+Number of students from each city:
+SELECT city, COUNT(*) AS total_students
+FROM students
+GROUP BY city;
+
+12. Add Another Table for JOIN
+Create courses table
+CREATE TABLE courses (
+    course_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT,
+    course_name VARCHAR(50),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+Insert Data
+INSERT INTO courses (student_id, course_name) VALUES
+(1, 'Java'),
+(1, 'SQL'),
+(2, 'Python'),
+(3, 'JavaScript'),
+(5, 'C++');
+
+13. JOIN Operation
+Show student name + course name
+SELECT 
+    students.name,
+    students.city,
+    courses.course_name
+FROM students
+JOIN courses
+ON students.student_id = courses.student_id;
+
+14. LEFT JOIN
+
+SELECT 
+    students.name,
+    courses.course_name
+FROM students
+LEFT JOIN courses
+ON students.student_id = courses.student_id;
+
+15. BETWEEN
+Students aged between 20 and 23
+SELECT * FROM students WHERE age BETWEEN 20 AND 23;
+
+16. IN operator
+SELECT * FROM students WHERE city IN ('Mysuru', 'Bengaluru');
+
+17. ALTER TABLE
+Add new column
+ALTER TABLE students ADD email VARCHAR(100);
+
+Modify column
+ALTER TABLE students MODIFY marks FLOAT;
+
+Delete column
+ALTER TABLE students DROP COLUMN email;
+
+18. DROP Table
+DROP TABLE courses;
+DROP TABLE students;
+
+19. GROUP BY
+SELECT city, COUNT(*) AS total_students
+FROM students
+GROUP BY city;
+
+20. GROUP BY with AVG()
+SELECT city, AVG(marks) AS avg_marks
+FROM students
+GROUP BY city;
+
+21.HAVING
+SELECT city, COUNT(*) AS total_students
+FROM students
+GROUP BY city
+HAVING COUNT(*) > 1;
+
+22.HAVING with aggregate + filter marks
+SELECT city, AVG(marks) AS avg_marks
+FROM students
+GROUP BY city
+HAVING AVG(marks) > 80;
+
+23.WHERE + GROUP BY + HAVING
+SELECT city, COUNT(*) AS total_students
+FROM students
+WHERE marks >= 50        
+GROUP BY city
+HAVING COUNT(*) > 1;  
