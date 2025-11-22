@@ -1,0 +1,90 @@
+
+Example Table: student
+
+CREATE TABLE student (
+  id INT PRIMARY KEY,
+  name VARCHAR(50),
+  age INT,
+  marks INT,
+  city VARCHAR(50)
+);
+
+INSERT INTO student VALUES
+(1, 'Ravi', 18, 85, 'Bangalore'),
+(2, 'Anita', 19, 75, 'Mysore'),
+(3, 'Kiran', 18, 90, 'Bangalore'),
+(4, 'Priya', 20, 60, 'Chennai'),
+(5, 'Rohit', 19, 80, 'Mysore');
+
+
+1. Select all records
+
+SELECT * FROM student;
+
+2. Select students from a specific city
+
+SELECT * FROM student WHERE city = 'Mysore';
+
+3. Select students with marks greater than 80
+
+SELECT * FROM student WHERE marks > 80;
+
+4. Order data Descending
+
+SELECT * FROM student ORDER BY marks DESC;
+
+5. Count number of students
+
+SELECT COUNT(*) AS total_students FROM student;
+
+6. Find average marks
+
+SELECT AVG(marks) AS avg_marks FROM student;
+
+7. Group by city
+
+SELECT city, COUNT(*) AS total FROM student GROUP BY city;
+
+8. Having clause filter group results
+
+SELECT city, AVG(marks) AS avg_marks FROM student 
+GROUP BY city HAVING avg_marks > 75;
+
+9. Update marks
+
+UPDATE student SET marks = 95 WHERE name = 'Kiran';
+
+
+10. Delete record
+
+DELETE FROM student WHERE id = 4;
+
+
+11. Add a new column
+
+ALTER TABLE student ADD COLUMN grade VARCHAR(5);
+
+
+12. Rename table
+
+RENAME TABLE student TO student_info;
+
+
+13. Create another table 
+
+CREATE TABLE course (
+  course_id INT PRIMARY KEY,
+  course_name VARCHAR(50)
+);
+
+
+14. Insert values into course table
+
+INSERT INTO course VALUES (101, 'Maths'), (102, 'Science');
+
+15. Join two tables
+
+SELECT s.name, c.course_name 
+FROM student_info s 
+JOIN course c 
+ON s.id = c.course_id;
