@@ -1,0 +1,117 @@
+python is hight level interpreted ,general purpose programming language that is known for its simplility
+readbiliity and flexibility
+it was created by guido van rossum and first released in 1991
+
+Features
+1. Easy to Learn and Read -
+	Python syntax is very similar to English, making it easy for beginners.
+2. Interpreted Language	-
+      You don’t need to compile Python —
+       it runs line by line using an interpreter.
+3. Dynamically Typed	-
+      You don’t need to declare variable types (x = 10 is valid).
+4. Cross-Platform	-
+       Python works on Windows, Mac, Linux, etc.
+5. Huge Standard Library	-
+        Comes with modules for file handling, math, OS operations, etc.
+6. Object-Oriented	-
+         Supports classes, inheritance, and polymorphism.
+7. Open Source	-
+         Free to download and use for everyone.
+8. Extensible and Embeddable	-
+         You can integrate Python with C, C++, and Java.
+9. Supports GUI Programming	Libraries -
+        like Tkinter, PyQt, and Kivy allow GUI app creation.
+10. Large Community Support	-
+         Millions of developers contribute tutorials, libraries, and tools.
+
+ Python is Widely Used :-
+ web development.
+ cloud computing.
+ data analysis.
+ artificial intelligency.
+ scientific computing and more.
+ Game Development.
+ Cyber Security.
+ Machine Learning & AI.
+
+
+Advantages:
+Easy to learn and read
+Interpreted & cross-platform	
+Large standard library	
+Strong community support	
+Rapid development	
+Great for AI, ML, and Data Science	
+
+Disadvantages:
+Slower execution speed
+High memory usage
+Not ideal for mobile development
+Runtime errors possible
+Weak in multi-threading
+Weak in multi-threading
+Slower database access
+
+python syntax:-
+python syntax referes to the set of rukes that define how python program is written and interpreted by the 
+python interpreter.
+
+comment:-
+A comment in Python is a line of text ignored by the interpreter.
+It is used only for humans to read and understand the code, not for Python to execute.
+A comment is a piece of text in a program that starts with the symbol # or is enclosed
+in triple quotes (''' or """), used to explain the code.
+
+two main types of comments:
+Single-line comments:
+A single-line comment starts with a hash symbol #.
+Everything written after # on that line is ignored by Python.
+ex:
+# This is a single-line comment
+print("Hello, World!")
+
+Multi-line comments:
+there are two ways to write multi-line comments:
+
+a. Using # on Each Line
+
+You can write multiple lines, each starting with #.
+
+# This is a multi-line comment
+# explaining the next few lines of code
+x = 5
+y = 10
+print(x + y)
+
+b. Using Triple Quotes (''' or """)
+
+Triple quotes can be used to create multi-line text blocks.
+If the text is not assigned to a variable, Python ignores it, so it acts as a multi-line comment.
+
+'''
+This is a multi-line comment.
+It can span across multiple lines.
+Python will ignore this text.
+'''
+print("Python Comments Example")
+
+
+Variable:
+a variable acts like a container or box that holds some data
+ (number, text, list, etc.) which can change during program execution.
+ ex:
+x = 10
+y = 20
+name = "Santhu"
+
+print(x)
+print(y)
+print(name)
+
+Variable names follow some rule:
+Must start with a letter or underscore 
+Cannot start with a number	
+Can contain letters, numbers, and underscores	
+Are case-sensitive	Age and age are different
+Cannot use Python keywords like if, for, class, etc
