@@ -1,0 +1,154 @@
+Integer Datatype
+x = 10
+y = -5
+z = 0
+print(x, y, z)
+print(type(x))
+ex 2:
+a = 5.75
+b = 2.0
+print(a + b)
+print(type(a))
+
+num = 3.14159
+print(round(num, 2))   
+print(int(num))       
+
+
+Float Datatype
+a = 10.5
+b = -3.14
+c = 0.0
+print(a, b, c)
+print(type(a))
+ex 2:
+a = 5.75
+b = 2.0
+print(a + b)
+print(type(a))
+
+
+Complex Datatype
+x = 2 + 3j
+y = 1j
+print(x)
+print("Real part:", x.real)
+print("Imaginary part:", x.imag)
+print(type(x))
+ex 2:
+z = 3 + 4j
+print(z)
+print(type(z))
+print(z.real)   
+print(z.imag)   
+print(abs(z)) 
+
+
+String Datatype
+name = "Santhu"
+greeting = 'Hello!'
+msg = """Welcome to Python."""
+print(name)
+print(greeting)
+print(msg)
+print(type(name))
+text = "hello python"
+
+print(text.upper())      
+print(text.lower())      
+print(text.title())     
+print(text.replace("python", "Santhu"))  
+print(len(text))        
+
+
+Boolean Datatype
+x = True
+y = False
+a = (10 > 5)
+b = (5 == 10)
+print(x)
+print(y)
+print(a)
+print(b)
+print(type(x))
+x = 10
+y = 5
+print(x > y)   
+print(x == y)  
+print(bool(0))
+print(bool(1)) 
+
+List Datatype:
+fruits = ["apple", "banana", "cherry"]
+numbers = [1, 2, 3, 4, 5]
+mixed = [10, "Santhu", True, 5.5]
+print(fruits)
+print(numbers)
+print(mixed)
+print(type(fruits))
+fruits = ["apple", "banana", "cherry"]
+print(fruits)
+print(type(fruits))
+fruits.append("grape")     
+fruits.remove("banana")   
+fruits.insert(1, "mango")  
+fruits.sort()             
+print(fruits)
+
+
+Tuple Datatype:
+colors = ("red", "green", "blue")
+numbers = (1, 2, 3, 4)
+single = (10,)
+print(colors)
+print(numbers)
+print(single)
+print(type(colors))
+colors = ("red", "green", "blue")
+print(colors)
+print(type(colors))
+print(colors.count("red")) 
+print(colors.index("blue")) 
+print(len(colors))         
+
+
+Set Datatype:
+myset = {1, 2, 3, 3, 4}
+names = {"Santhu", "Raj", "Kumar"}
+print(myset)
+print(names)
+print(type(myset))
+numbers = {1, 2, 3, 3, 4}
+print(numbers)
+print(type(numbers))
+numbers.add(5)         
+numbers.remove(2)      
+numbers.discard(10)   
+numbers.update({6,7}) 
+print(numbers)
+     
+
+Dictionary Datatype:
+student = {
+    "name": "Santhu",
+    "age": 21,
+    "course": "Python"
+}
+print(student)
+print(student["name"])
+print(student["course"])
+print(type(student))
+student = {"name": "Santhu", "age": 21, "course": "Python"}
+print(student)
+print(type(student))
+print(student.keys())       
+print(student.values())     
+print(student.items())     
+student["age"] = 22        
+student.update({"city": "Bangalore"}) 
+print(student)
+
+None Datatype:
+x = None
+print(x)
+print(type(x))
