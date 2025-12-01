@@ -1,0 +1,140 @@
+############# Simple Function #############
+
+def greet ():
+  print("hello")
+greet()
+
+
+ def greet ():
+     return "Hello Priya"
+ print(greet())
+
+
+ def greet ():
+     print("hello")
+     return
+ greet()
+
+
+def greet ():
+   print("hello dee")
+     return "Hello dear"
+ print(greet())
+
+
+ def greet ():
+     return "Hello babe"
+     print("hello dee")
+ print(greet())
+
+
+
+############### Function With Parameter ################
+
+
+ def add(a,b):
+     print(a+b)
+ add(10,20)
+
+
+ def add(a,b):
+    return a + b
+ print(add(10,20))
+
+
+ def add(a,b):
+     out=a+b
+     return out
+ print(add(10,20))
+
+
+ def add(a,b):
+     out=a+b
+     print(out)
+ print(add(10,20))
+
+
+ def add(a,b):
+     out=a+b
+     print(out)
+ add(10,20)
+
+
+############### Function With Default Parameter ################
+
+ def greet(name="Priya"):
+     return f" hello {name}"
+ print(greet())
+ print(greet("sam"))
+
+
+ def greet(name="Priya"):
+     print(f"Hello {name}")
+ greet()
+ greet("sam")
+
+
+ def mul(a,b):
+     result = a * b
+     return result
+ print(mul(10,20))
+
+
+
+ def maths(num1,num2):
+     return(num1+num2,num1-num2,num1*num2,num1/num2)
+ add,sub,mul,div = maths(100,50)
+ print(maths(100,50))
+
+
+
+ def maths (num1,num2):
+     print ((num1+num2,num1-num2,num1*num2,num1/num2))
+ maths(30,20)
+
+
+
+ def calculateTotal(price,tax=5):
+     total = price + (price * tax/100)
+    return total
+
+ print(calculateTotal(100))
+ print(calculateTotal(100,10))
+
+
+
+ def calculateTotal(price, tax=5):
+     total = price + (price*tax/100)
+     print(total)
+ calculateTotal(100)
+ calculateTotal(100,20)
+
+
+ def add(a,b):
+     return a+b
+ result = add(5,10)
+ print(result)
+
+
+ def add(a,b):
+    return a+b
+print(add(10,5))
+
+
+ def square(n):
+     return n*n
+ value = square(4)
+ print(value)
+
+
+
+ def square(n):
+     return n*n
+ value = square(4)
+ print(value + 10)
+
+
+def totalSum(*args):
+    return sum(args)
+print(totalSum(10,20))
+print(totalSum(1,2,3,4))
