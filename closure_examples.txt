@@ -1,0 +1,59 @@
+1. closure
+A closure in Python is a function inside another function (nested function) that remembers the variables from the 
+outer function — even after the outer function has finished executing.
+
+# Restaurant Billing System--------------------
+
+def billing_system(gst):
+    def final_bill(amount):
+        return amount + (amount * gst / 100)
+    return final_bill
+
+restaurant_bill = billing_system(5)
+
+print("Total for ₹100:", restaurant_bill(100))
+print("Total for ₹250:", restaurant_bill(250))
+
+
+
+Bank Loan EMI Calculator------------------------------
+
+def loan_calculator(interest_rate):
+    def calculate(amount):
+        return amount + (amount * interest_rate / 100)
+    return calculate
+
+sbi_loan = loan_calculator(7)
+hdfc_loan = loan_calculator(8.5)
+
+print("SBI Loan Total:", sbi_loan(100000))
+print("HDFC Loan Total:", hdfc_loan(100000))
+
+
+
+
+Online Shopping Discount System  ------------------------------ 
+
+def discount_offer(discount):
+    def apply_discount(price):
+        return price - (price * discount / 100)
+    return apply_discount
+
+electronics_offer = discount_offer(10)
+clothes_offer = discount_offer(25)
+
+print("Electronics (₹2000):", electronics_offer(2000))
+print("Clothes (₹2000):", clothes_offer(2000))
+
+
+
+Chatbot Personalized Greeting------------------------------
+
+def chatbot(name):
+    def reply(msg):
+        return f"Hi {name}, you said: {msg}"
+    return reply
+
+santhu_bot = chatbot("Santhu")
+print(santhu_bot("Hello!"))
+print(santhu_bot("How are you?"))
