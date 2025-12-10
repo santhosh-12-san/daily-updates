@@ -1,0 +1,56 @@
+
+class example-----------------------
+
+class Mobile:
+    def __init__(self, brand, model, price):
+        self.brand = brand
+        self.model = model
+        self.price = price
+
+    def call(self):
+        print(f"{self.brand} {self.model} is calling...")
+
+phone1 = Mobile("Samsung", "S23", 80000)
+phone2 = Mobile("Apple", "iPhone 15", 120000)
+
+phone1.call()
+phone2.call()
+
+
+constructor example--------------\
+class ATM:
+    def __init__(self, card_number):
+        print("Card Inserted")
+        self.card_number = card_number
+        self.balance = 50000  # fetched automatically
+
+    def show_balance(self):
+        print("Balance:", self.balance)
+
+atm = ATM("1234-5678-9876")
+atm.show_balance()
+
+
+inheritance example-----------------
+
+class Vehicle:
+    def start(self):
+        print("Vehicle starting...")
+    def stop(self):
+        print("Vehicle stopping...")
+
+class Car(Vehicle):
+    def open_door(self):
+        print("Car door opened")
+
+class Bike(Vehicle):
+    def kick_start(self):
+        print("Bike kick-started")
+
+car = Car()
+car.start()
+car.open_door()
+
+bike = Bike()
+bike.start()
+bike.kick_start()
