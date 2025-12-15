@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="d-flex gap-3 overflow-auto mb-4 pb-2 border-bottom">
+    <a href="/" class="btn btn-outline-primary rounded-pill">Top Deals</a>
+    <a href="/?category=Cycles" class="btn btn-outline-secondary rounded-pill">Cycles</a>
+    <a href="/?category=Electronics" class="btn btn-outline-secondary rounded-pill">Electronics</a>
+    <a href="/?category=Groceries" class="btn btn-outline-secondary rounded-pill">Groceries</a>
+</div>
+
+<h3 class="mb-4 fw-bold">Cycle Best Sellers</h3>
+<div class="row g-4">
+    {% for product in products %}
+    <div class="col-6 col-md-3">
+        <div class="card h-100 border-0 shadow-sm p-2">
+            <div style="height: 180px; overflow: hidden;" class="d-flex align-items-center justify-content-center">
+                <img src="{{ product.image_url }}" class="img-fluid" style="max-height: 100%;" alt="{{ product.name }}">
+            </div>
+            
+            <div class="card-body px-2">
+                <h6 class="card-title text-truncate" title="{{ product.name }}">{{ product.name }}</h6>
+                
+                <div class="mb-2">
+                    <span class="price-tag">₹{{ product.price }}</span>
+                    <br>
+                    <span class="original-price">₹{{ product.original_price }}</span>
+                    <span class="discount-badge ms-1">Save ₹{{ product.original_price - product.price }}</span>
+                </div>
+                
+                <a href="/add_to_cart/{{ product.id }}" class="btn btn-primary w-100 rounded-pill btn-sm fw-bold" style="background-color: #0078ad;">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
