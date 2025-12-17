@@ -46,6 +46,8 @@
 //     .catch(err => console.log(err));
 
 
+//--------------------------------------banking -----------------------------
+
 function fetchAccountDetails(accountId) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -57,3 +59,5 @@ function fetchAccountDetails(accountId) {
 fetchAccountDetails(101)
     .then(info => console.log(info))
     .catch(err => console.log(err));
+
+

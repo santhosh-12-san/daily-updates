@@ -1,4 +1,4 @@
-1. Square each number--------
+1. Square each number----------------------
 
 nums = [1, 2, 3, 4, 5]
 print(list(map(lambda x: x**2, nums)))
@@ -8,138 +8,137 @@ print(list(map(lambda x: x**2, nums)))
 names = ['santhu', 'harish', 'ram']
 print(list(map(str.upper, names)))
 
-3. Add 10 to each number--------------
+3. Add 10 to each number----------------------------
+num = [1, 2, 3]
+print(list(map(lambda x: x + 10,num)))
 
-print(list(map(lambda x: x + 10, [1, 2, 3])))
 
+4. Convert integers to strings----------------------
+num = [10, 20, 30]
+print(list(map(str,num)))
 
-4. Convert integers to strings------------
-
-print(list(map(str, [10, 20, 30])))
-
-5. Get lengths of words-------------
+5. Get lengths of words-----------------------------
 
 words = ['apple', 'banana', 'kiwi']
 print(list(map(len, words)))
 
-6. Cube each number-------------
-
+6. Cube each number----------------------------------
 print(list(map(lambda x: x**3, [2, 3, 4])))
 
-7. Multiply elements of two lists--------------
+7. Multiply elements of two lists--------------------
 
 a = [1, 2, 3]
 b = [4, 5, 6]
 print(list(map(lambda x, y: x * y, a, b)))
 
 
-8. Convert list of floats to integers-----------
+8. Convert list of floats to integers-----------------
 
 nums = [1.2, 3.8, 4.5]
 print(list(map(int, nums)))
 
 
-9. Reverse each string-------------
+9. Reverse each string---------------------------------
+str1 =  ['abc', 'def', 'ghi']
+print(list(map(lambda s: s[::-1],str1)))
 
-print(list(map(lambda s: s[::-1], ['abc', 'def', 'ghi'])))
-
-10. Convert Celsius to Fahrenheit------------
+10. Convert Celsius to Fahrenheit-----------------------
 
 celsius = [0, 10, 20, 30]
 print(list(map(lambda c: (9/5)*c + 32, celsius)))
 
 
 
-11. Keep even numbers-----------------
+11. Keep even numbers------------------------------------
 
 nums = [1, 2, 3, 4, 5, 6]
 print(list(filter(lambda x: x % 2 == 0, nums)))
 
 
-12. Keep odd numbers-------------
+12. Keep odd numbers-------------------------------------
 
 print(list(filter(lambda x: x % 2 != 0, nums)))
 
-13. Keep numbers greater than 5------------
+13. Keep numbers greater than 5-------------------------
 
 print(list(filter(lambda x: x > 5, [2, 6, 8, 3, 10])))
 
 
-14. Keep words longer than 4 letters---------------
+14. Keep words longer than 4 letters---------------------
 \
 words = ['hi', 'python', 'map', 'filter']
 print(list(filter(lambda w: len(w) > 4, words)))
 
 
-15. Filter positive numbers-------------
+15. Filter positive numbers-----------------------------
 
 nums = [-5, 3, -2, 9, 0, 4]
 print(list(filter(lambda x: x > 0, nums)))
 
 
-16. Filter strings that start with 'a'------------
+16. Filter strings that start with 'a'------------------
 
 names = ['apple', 'banana', 'avocado', 'mango']
 print(list(filter(lambda n: n.startswith('a'), names)))
 
 
-17. Filter out None values--------------
+17. Filter out None values------------------------------
 
 values = [1, None, 2, None, 3]
 print(list(filter(None, values)))
 
 
-18. Filter numbers divisible by 3------------
+18. Filter numbers divisible by 3-----------------------
 
 nums = [3, 4, 6, 7, 9, 10]
 print(list(filter(lambda x: x % 3 == 0, nums)))
 
 
-19. Filter uppercase words---------------
+19. Filter uppercase words-----------------------
 
 words = ['HELLO', 'world', 'PYTHON', 'code']
 print(list(filter(lambda w: w.isupper(), words)))
 
 
-20. Filter palindromes----------------
+20. Filter palindromes----------------------------
 
 words = ['madam', 'hello', 'level', 'world']
 print(list(filter(lambda w: w == w[::-1], words)))
 
 
 
-21. Sum of all numbers---------------
+21. Sum of all numbers----------------------------
 
 from functools import reduce
 nums = [1, 2, 3, 4, 5]
 print(reduce(lambda a, b: a + b, nums))
 
 
-22. Product of all numbers----------------------
+22. Product of all numbers-----------------------------
 
 from functools import reduce
 print(reduce(lambda a, b: a * b, nums))
 
-23. Find maximum number---------------------------
+23. Find maximum number---------------------------------
 
 from functools import reduce
-nums = [10, 50, 30, 70, 20]
+nums = [10, 50, 30, 70, 20]dzdx
 print(reduce(lambda a, b: a if a > b else b, nums))
 
 
-24. Find minimum number--------------------------
+24. Find minimum number-----------------------------------
 
 from functools import reduce
 print(reduce(lambda a, b: a if a < b else b, nums))
 
-25. Concatenate all strings-----------------------
+25. Concatenate all strings--------------------------------
 
 from functools import reduce
 words = ['Python', 'is', 'fun']
 print(reduce(lambda a, b: a + ' ' + b, words))
 
 
-26. Sum of squares-------------------
+26. Sum of squares-------------------------------------------
 
 from functools import reduce
 nums = [1, 2, 3, 4]
@@ -153,14 +152,14 @@ digits = [1, 2, 3, 4]
 print(reduce(lambda a, b: a*10 + b, digits))
 
 
-28. Subtract all numbers----------------------
+28. Subtract all numbers--------------------------
 
 from functools import reduce
 nums = [10, 2, 1]
 print(reduce(lambda a, b: a - b, nums))
 
 
-29. Find longest word----------------------
+29. Find longest word-----------------------------
 
 from functools import reduce
 words = ['apple', 'banana', 'cherry']

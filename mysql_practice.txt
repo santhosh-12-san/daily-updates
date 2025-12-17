@@ -8,6 +8,7 @@ CREATE TABLE students (
     name VARCHAR(50) NOT NULL,
     age INT,
     gender ENUM('Male', 'Female'),
+    
     marks INT,
     city VARCHAR(50)
 );
@@ -16,7 +17,7 @@ CREATE TABLE students (
 INSERT INTO students (name, age, gender, marks, city) VALUES
 ('Santhosh', 22, 'Male', 85, 'Bengaluru'),
 ('Harish', 23, 'Male', 75, 'Mysuru'),
-('Pooja', 21, 'Female', 90, 'Bengaluru'),
+('sathisha', 21, 'Female', 90, 'Bengaluru'),
 ('Asha', 20, 'Female', 60, 'Hubli'),
 ('Kiran', 22, 'Male', 45, 'Mysuru');
 
@@ -152,3 +153,4 @@ FROM students
 WHERE marks >= 50        
 GROUP BY city
 HAVING COUNT(*) > 1;  
+

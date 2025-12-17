@@ -25,7 +25,7 @@ and every object created from that constructor has an internal link [prototype] 
 It work javascript first checks if that property exists on the object itself .
 If not it looks for the property in the objects prototype.
 This continues up the prototype chain until it reaches object prototype.
-prototype chaining  i sthe process of travaersing the prototype chain to
+prototype chaining  is the process of travaersing the prototype chain to
  access the propertice anad method of an objects prototype and its parent prototype
 It will be use we want to share methods or properties among all instances of an object
 it will save the memory.

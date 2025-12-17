@@ -6,7 +6,7 @@ greet()
 
 
  def greet ():
-     return "Hello Priya"
+     return "Hello santhu"
  print(greet())
 
 

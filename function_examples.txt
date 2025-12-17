@@ -1,0 +1,178 @@
+1️ Even or Odd----------------------
+
+def even_or_odd(num):
+    if num % 2 == 0:
+        print(f"{num} is Even")
+    else:
+        print(f"{num} is Odd")
+
+even_or_odd(7)
+
+
+2️ Check Palindrome--------------------
+
+def is_palindrome(s):
+    if s == s[::-1]:
+        print(f"{s} is a palindrome")
+    else:
+        print(f"{s} is not a palindrome")
+
+is_palindrome("madam")
+
+
+3️ Reverse a String-------------------------
+
+def reverse_string(s):
+    return s[::-1]
+
+print(reverse_string("python"))
+
+4️ Sum of Digits----------------------------
+
+def sum_of_digits(num):
+    total = 0
+    while num > 0:
+        total += num % 10
+        num //= 10
+    return total
+
+print(sum_of_digits(1234))
+
+5️ Factorial of a Number-------------------------
+
+def factorial(n):
+    fact = 1
+    for i in range(1, n + 1):
+        fact *= i
+    return fact
+
+print(factorial(5))
+
+6️ Fibonacci Series---------------------------
+
+def fibonacci(n):
+    a, b = 0, 1
+    for i in range(n):
+        print(a, end=" ")
+        a, b = b, a + b
+
+fibonacci(10)
+
+7️ Check Prime Number-------------------------------
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+print(is_prime(7))
+
+8️ Find Maximum of Three Numbers----------------------------
+
+def maximum(a, b, c):
+    return max(a, b, c)
+
+print(maximum(5, 10, 3))
+
+9️ Check Armstrong Number--------------------------------------
+
+def is_armstrong(num):
+    power = len(str(num))
+    total = sum(int(digit)**power for digit in str(num))
+    return total == num
+
+print(is_armstrong(153))
+
+10 Check Positive, Negative, or Zero--------------------------------
+
+def check_number(n):
+    if n > 0:
+        print("Positive")
+    elif n < 0:
+        print("Negative")
+    else:
+        print("Zero")
+
+check_number(-3)
+
+1️1️ Count Vowels in String--------------------------------
+
+def count_vowels(s):
+    vowels = "aeiouAEIOU"
+    count = sum(1 for ch in s if ch in vowels)
+    return count
+
+print(count_vowels("Hello World"))
+
+
+1️2️ Find Largest Element in List------------------------------
+
+def find_largest(lst):
+    return max(lst)
+
+print(find_largest([2, 8, 4, 9, 1]))
+
+
+1️3️ Find Smallest Element in List
+
+def find_smallest(lst):
+    return min(lst)
+
+print(find_smallest([2, 8, 4, 9, 1]))
+
+
+1️4️ Check Leap Year-------------------------------------
+
+def is_leap_year(year):
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+print(is_leap_year(2024))
+
+1️5️ Sum of N Natural Numbers--------------------------
+
+def sum_natural(n):
+    return n * (n + 1) // 2
+
+print(sum_natural(10))
+
+1️6️ Table of a Number-------------------------------------
+
+def print_table(n):
+    for i in range(1, 11):
+        print(f"{n} x {i} = {n*i}")
+
+print_table(5)
+
+ 1️7️ Count Words in String------------------------------
+
+def count_words(s):
+    return len(s.split())
+
+print(count_words("Python is fun"))
+
+
+1️8️ Convert Celsius to Fahrenheit------------------------
+
+def c_to_f(c):
+    return (c * 9/5) + 32
+
+print(c_to_f(37))
+
+
+1️9️ Square of a Number-----------------------------------
+
+def square(n):
+    return n * n
+
+print(square(6))
+
+2️0️ Check String Contains Only Digits----------------------
+
+def only_digits(s):
+    return s.isdigit()
+
+print(only_digits("12345"))
+print(only_digits("abc123"))

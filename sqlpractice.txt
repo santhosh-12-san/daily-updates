@@ -1,4 +1,4 @@
-SELECT * FROM employees
+git commSELECT * FROM employees
 WHERE department = 'IT';
 
 
