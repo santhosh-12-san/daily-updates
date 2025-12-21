@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">User Details</h2>
+
+<table class="table table-bordered text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>info</th>
+            <th>details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, value in data.items %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
