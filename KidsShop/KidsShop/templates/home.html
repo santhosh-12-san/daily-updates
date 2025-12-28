@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if sliders %}
+<div id="adCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for slide in sliders %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ slide.image.url }}" class="d-block w-100" alt="{{ slide.title }}" style="height: 400px; object-fit: cover;">
+      </div>
+    {% empty %}
+      <div class="carousel-item active">
+         <div class="d-block w-100 bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 400px;">
+            <h3>No slides uploaded yet.</h3>
+         </div>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#adCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#adCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </button>
+</div>
+{% endif %} 
+<div class="container">
+    <h2 class="mb-4">Our Products</h2>
+    
+    {% if product_count %}
+    <p class="text-muted">Found {{ product_count }} items.</p>
+    {% endif %}
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text text-muted">${{ product.price }}</p>
+                    <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary w-100">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center mt-5">
+            <h3>No products found.</h3>
+            <p>Try searching for something else.</p>
+            <a href="{% url 'home' %}" class="btn btn-outline-primary">Go Back Home</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
