@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="container my-4">    
+    <div class="row justify-content-center">
+        {% for category in categories %}
+        <div class="col-md-2 col-4 text-center mb-3">
+            <a href="{{ category.get_url }}" class="text-decoration-none text-dark">
+                
+                <div class="card border-0">
+                    <img src="{{ category.image.url }}" class="card-img-top rounded-circle" alt="{{ category.name }}" style="width: 100px; height: 100px; object-fit: cover; margin: 0 auto;">
+                </div>
+                
+                <h6 class="mt-2">{{ category.category_name }}</h6>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% if sliders %}
+<div id="adCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for slide in sliders %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ slide.image.url }}" class="d-block w-100" alt="{{ slide.title }}" style="height: 400px; object-fit: cover;">
+      </div>
+    {% empty %}
+      <div class="carousel-item active">
+         <div class="d-block w-100 bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 400px;">
+            <h3>No slides uploaded yet.</h3>
+         </div>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#adCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#adCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </button>
+</div>
+{% endif %} 
+
+<div class="container">
+    <h2 class="mb-4">Our Products</h2>
+    
+    {% if product_count %}
+    <p class="text-muted">Found {{ product_count }} items.</p>
+    {% endif %}
+
+    <div class="row">
+        {% for product in products %}
+        
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 250px; object-fit:contain;">
+                </a>
+
+                <div class="card-body">
+                    <h6 class="card-title">
+                        {% if product.name|length > 25 %}
+                            <span id="short-name-{{ product.id }}">
+                                <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">
+                                    {{ product.name|slice:":25" }}...
+                                </a>
+                                <a href="javascript:void(0);" onclick="toggleName('{{ product.id }}')" class="text-primary" style="font-size: 0.8rem; text-decoration: none;">More</a>
+                            </span>
+
+                            <span id="full-name-{{ product.id }}" style="display: none;">
+                                <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">
+                                    {{ product.name }}
+                                </a>
+                                <a href="javascript:void(0);" onclick="toggleName('{{ product.id }}')" class="text-danger" style="font-size: 0.8rem; text-decoration: none;">Less</a>
+                            </span>
+
+                        {% else %}
+                            <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">
+                                {{ product.name }}
+                            </a>
+                        {% endif %}
+                    </h6>
+
+                    <p class="card-text text-muted">₹{{ product.price }}</p>
+                    <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary w-100">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center mt-5">
+            <h3>No products found.</h3>
+            <p>Try searching for something else.</p>
+            <a href="{% url 'home' %}" class="btn btn-outline-primary">Go Back Home</a>
+        </div>
+        {% endfor %}
+        
+        
+    </div>
+</div>
+{% endblock %}

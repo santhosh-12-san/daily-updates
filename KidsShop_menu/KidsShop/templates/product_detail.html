@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card shadow-sm">
+        <div class="row g-0">
+            <div class="col-md-6 border-end">
+                <div class="d-flex flex-column justify-content-center align-items-center h-100 p-3">
+                    <img src="{{ product.image.url }}" class="img-fluid" style="max-height: 500px;" alt="{{ product.name }}">
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="p-4">
+                    <div class="mb-3">
+                        <span class="badge bg-primary">In Stock</span>
+                        <span class="text-muted ms-2">{{ product.category }}</span>
+                    </div>
+                    
+                    <h2 class="fw-bold">{{ product.name }}</h2>
+                    <h3 class="text-danger my-3">₹{{ product.price }}</h3>
+                    
+                    <p class="text-muted">{{ product.description }}</p>
+                    
+                    <hr>
+                    
+                    <div class="d-flex gap-3 mt-4">
+                       <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+
+                    <a href="{% url 'add_to_cart' product.id %}?action=buy_now" class="btn btn-warning">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content padding-y bg-light" style="min-height: 80vh;">
+<div class="container my-5">
+    
+    <h2 class="mb-4 text-center">Checkout</h2>
+
+    <div class="row">
+        
+        <aside class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Shipping Details</h5>
+                </div>
+                <div class="card-body">
+
+                    {% if saved_addresses %}
+                    <div class="alert alert-primary d-flex align-items-center mb-4" role="alert">
+                        <i class="fa fa-bolt me-2"></i>
+                        <div class="flex-grow-1">
+                            <strong>Quick Fill:</strong> Select a saved address to auto-fill the form.
+                            <select class="form-select mt-2" id="addressSelector" onchange="fillAddress()">
+                                <option value="">-- Choose an address --</option>
+                                {% for addr in saved_addresses %}
+                                <option value="{{ addr.id }}" 
+                                        data-name="{{ addr.full_name }}"
+                                        data-phone="{{ addr.phone }}"
+                                        data-address="{{ addr.address_line }}"
+                                        data-city="{{ addr.city }}"
+                                        data-state="{{ addr.state }}">
+                                    {{ addr.full_name }} ({{ addr.city }})
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <form action="{% url 'checkout' %}" method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Ex: John Doe" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" name="phone" id="phone" class="form-control" placeholder="Ex: 9876543210" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <textarea name="address" id="address" class="form-control" rows="2" placeholder="House No, Street Name, Area" required></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">City</label>
+                                <input type="text" name="city" id="city" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">State</label>
+                                <input type="text" name="state" id="state" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 btn-lg mt-3">Place Order</button>
+                    </form>
+
+                </div>
+            </div>
+        </aside> <aside class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    
+                    {% for item in cart_items %}
+                    <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 50px; height: 50px; overflow: hidden; border-radius: 5px;" class="me-2 border">
+                                {% if item.product.image %}
+                                    <img src="{{ item.product.image.url }}" class="w-100 h-100" style="object-fit: cover;">
+                                {% else %}
+                                    <div class="bg-light w-100 h-100"></div>
+                                {% endif %}
+                            </div>
+                            
+                            <div>
+                                <h6 class="mb-0 text-truncate" style="max-width: 150px;">{{ item.product.name }}</h6>
+                                <small class="text-muted">Qty: {{ item.quantity }}</small>
+                            </div>
+                        </div>
+                        <span class="text-muted">₹{{ item.sub_total }}</span>
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <span class="fw-bold">Total Price:</span>
+                        <span class="fw-bold text-primary fs-5">₹{{ total }}</span>
+                    </div>
+                </div>
+            </div>
+        </aside> </div> </div> </section>
+
+<script>
+    function fillAddress() {
+        var selector = document.getElementById('addressSelector');
+        var selectedOption = selector.options[selector.selectedIndex];
+        if (selectedOption.value !== "") {
+            document.getElementById('full_name').value = selectedOption.getAttribute('data-name');
+            document.getElementById('phone').value = selectedOption.getAttribute('data-phone');
+            document.getElementById('address').value = selectedOption.getAttribute('data-address');
+            document.getElementById('city').value = selectedOption.getAttribute('data-city');
+            document.getElementById('state').value = selectedOption.getAttribute('data-state');
+        } else {
+            document.getElementById('full_name').value = "";
+            document.getElementById('phone').value = "";
+            document.getElementById('address').value = "";
+            document.getElementById('city').value = "";
+            document.getElementById('state').value = "";
+        }
+    }
+</script>
+
+{% endblock %}
